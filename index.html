@@ -13,39 +13,29 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
 }
 
-/* LOGO */
 .logo-container {
   margin-top: 20px;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.logo-container div {
-  position: relative;
-}
 .logo-text {
-  margin-top: 33px;
-  color: #d4af37;
-  letter-spacing: 1px;
-  font-size: 24px;
+  margin-top: 20px;
+  font-size: 26px;
   font-weight: bold;
+  color: #d4af37;
 }
 
-/* SORU EKRANLARI */
 .screen {
   display: none;
   width: 90%;
   max-width: 500px;
-  text-align: center;
   margin-top: 30px;
+  text-align: center;
 }
-
 .active { display: block; }
-
-h1 { font-size: 26px; margin-bottom: 20px; }
 
 .options {
   display: grid;
@@ -55,41 +45,29 @@ h1 { font-size: 26px; margin-bottom: 20px; }
 
 .card {
   background: white;
+  padding: 22px;
   border-radius: 20px;
-  padding: 30px 10px;
   font-size: 22px;
   cursor: pointer;
   box-shadow: 0 5px 10px rgba(0,0,0,0.1);
 }
-.card:active {
-  transform: scale(0.95);
-  background: #e0f7fa;
-}
 
-.money-box { font-size: 28px; margin: 20px 0; }
-.money-box input {
-  width: 90px;
-  font-size: 32px;
-  text-align: center;
-  border-radius: 10px;
-  border: 2px solid #4CAF50;
-}
-
-input[type="text"], input[type="tel"] {
+input {
   width: 90%;
-  font-size: 22px;
   padding: 15px;
-  border-radius: 15px;
+  font-size: 18px;
+  border-radius: 14px;
   border: 1px solid #ccc;
+  margin-bottom: 15px;
 }
 
 button {
-  font-size: 22px;
   padding: 15px 30px;
-  border: none;
-  border-radius: 20px;
+  font-size: 18px;
   background: #4CAF50;
   color: white;
+  border: none;
+  border-radius: 20px;
 }
 </style>
 </head>
@@ -97,111 +75,107 @@ button {
 <body>
 
 <div class="logo-container">
-  <div style="width:156px; height:180px;">
-    <div style="position:absolute; top:94px; left:50%; transform:translateX(-50%); width:60px; height:36px; background:#d4af37; clip-path: polygon(0 0, 100% 0, 50% 100%);"></div>
-    <div style="position:absolute; top:147px; left:50%; width:48px; height:48px; background:#d4af37; transform:translateX(-50%) rotate(45deg);"></div>
-    <div style="position:absolute; top:108px; left:18px; width:48px; height:48px; background:#d4af37; transform:rotate(45deg);"></div>
-    <div style="position:absolute; top:108px; right:18px; width:48px; height:48px; background:#d4af37; transform:rotate(45deg);"></div>
-  </div>
   <div class="logo-text">ELMAS</div>
 </div>
 
-<!-- SORULAR -->
 <div class="screen active">
-  <h1>Ne istiyorsun?</h1>
+  <h2>Ne arıyorsun?</h2>
   <div class="options">
-    <div class="card" onclick="setType('Satılık')">🏠 Satın Al</div>
-    <div class="card" onclick="setType('Kiralık')">🔑 Kirala</div>
+    <div class="card" onclick="setType('Satılık')">🏠 Satılık</div>
+    <div class="card" onclick="setType('Kiralık')">🔑 Kiralık</div>
   </div>
 </div>
 
 <div class="screen">
-  <h1 id="moneyTitle"></h1>
-  <div class="money-box">
-    <input type="number" id="moneyInput">
-    <span id="moneySuffix"></span>
-  </div>
-  <button onclick="saveMoney()">Devam</button>
+  <h2>Bütçen?</h2>
+  <input id="budget" type="number">
+  <button onclick="saveBudget()">Devam</button>
 </div>
 
 <div class="screen">
-  <h1>Nerede?</h1>
+  <h2>Şehir</h2>
   <div class="options">
-    <div class="card" onclick="setCity('İstanbul')">📍 İstanbul</div>
-    <div class="card" onclick="setCity('Ankara')">📍 Ankara</div>
-    <div class="card" onclick="setCity('İzmir')">📍 İzmir</div>
+    <div class="card" onclick="setCity('İstanbul')">İstanbul</div>
+    <div class="card" onclick="setCity('Ankara')">Ankara</div>
+    <div class="card" onclick="setCity('İzmir')">İzmir</div>
   </div>
 </div>
 
 <div class="screen">
-  <h1>Kaç oda?</h1>
+  <h2>Oda Sayısı</h2>
   <div class="options">
     <div class="card" onclick="setRoom('1+1')">1+1</div>
     <div class="card" onclick="setRoom('2+1')">2+1</div>
     <div class="card" onclick="setRoom('3+1')">3+1</div>
-    <div class="card" onclick="setRoom('4+1')">4+1</div>
   </div>
 </div>
 
 <div class="screen">
-  <h1>Seni tanıyalım 🙂</h1>
-  <input type="text" id="name" placeholder="Adın">
-  <input type="tel" id="tel" placeholder="Telefonun">
-  <button onclick="finish()">Gönder</button>
+  <h2>İletişim</h2>
+  <input id="name" placeholder="Ad Soyad">
+  <input id="phone" placeholder="Telefon">
+  <button onclick="submitForm()">Gönder</button>
 </div>
 
+<!-- GİZLİ FORM -->
+<form id="googleForm"
+      action="https://docs.google.com/forms/d/e/1FAIpQLSc8ZL1BaPodwanhWRj0sOsJFRFfTLQvlut-VM2TVCXkD8o7Gg/formResponse"
+      method="POST"
+      target="hidden_iframe">
+  <input type="hidden" name="entry.1383727072" id="f_type">
+  <input type="hidden" name="entry.1429357412" id="f_budget">
+  <input type="hidden" name="entry.492503015" id="f_city">
+  <input type="hidden" name="entry.751111491" id="f_room">
+  <input type="hidden" name="entry.567089153" id="f_name">
+  <input type="hidden" name="entry.37570419" id="f_phone">
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
+
 <script>
-let index = 0;
+let step = 0;
 let data = {};
 const screens = document.querySelectorAll(".screen");
 
 function next() {
-  screens[index].classList.remove("active");
-  index++;
-  screens[index].classList.add("active");
+  screens[step].classList.remove("active");
+  step++;
+  screens[step].classList.add("active");
 }
 
-function setType(type) {
-  data.type = type;
-  document.getElementById("moneyTitle").innerText =
-    type === "Satılık" ? "En fazla kaç milyon?" : "En fazla kaç bin?";
-  document.getElementById("moneySuffix").innerText =
-    type === "Satılık" ? " milyon" : " bin";
+function setType(v) {
+  data.type = v;
   next();
 }
 
-function saveMoney() {
-  data.money = document.getElementById("moneyInput").value;
+function saveBudget() {
+  data.budget = document.getElementById("budget").value;
   next();
 }
 
-function setCity(city) {
-  data.city = city;
+function setCity(v) {
+  data.city = v;
   next();
 }
 
-function setRoom(room) {
-  data.room = room;
+function setRoom(v) {
+  data.room = v;
   next();
 }
 
-function finish() {
+function submitForm() {
   data.name = document.getElementById("name").value;
-  data.tel = document.getElementById("tel").value;
+  data.phone = document.getElementById("phone").value;
 
-  const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSc8ZL1BaPodwanhWRj0sOsJFRFfTLQvlut-VM2TVCXkD8o7Gg/formResponse";
+  document.getElementById("f_type").value = data.type;
+  document.getElementById("f_budget").value = data.budget;
+  document.getElementById("f_city").value = data.city;
+  document.getElementById("f_room").value = data.room;
+  document.getElementById("f_name").value = data.name;
+  document.getElementById("f_phone").value = data.phone;
 
-  const fd = new FormData();
-  fd.append("entry.1383727072", data.type);
-  fd.append("entry.1429357412", data.money);
-  fd.append("entry.492503015", data.city);
-  fd.append("entry.751111491", data.room);
-  fd.append("entry.567089153", data.name);
-  fd.append("entry.37570419", data.tel);
-
-  fetch(formURL, { method: "POST", mode: "no-cors", body: fd });
-
-  alert("Talebin alındı 👍");
+  document.getElementById("googleForm").submit();
+  alert("Talebin başarıyla gönderildi ✅");
 }
 </script>
 
