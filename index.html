@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ev Türü Seçimi</title>
+<style>
+  /* Sayfanın temel stili */
+  body { 
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+  }
+
+  /* Seçenekler için buton tarzı */
+  .option { 
+    padding: 20px 40px;
+    margin: 10px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<h1>Ev Türünü Seç</h1>
+
+<!-- Seçenekler -->
+<div class="option" onclick="sendType('Satılık')">🏠 Satılık</div>
+<div class="option" onclick="sendType('Kiralık')">🔑 Kiralık</div>
+
+<script>
+/* Kullanıcı bir seçeneğe tıkladığında çalışır */
+function sendType(type) {
+  // Google Form'un formResponse linki
+  const formURL = "https://docs.google.com/forms/d/e/1FAIpQLSehNuzCi7WGMeQw_JXAK3sEPfnBEzgEIovx-C3EOYqUG1wQmw/formResponse";
+
+  // FormData nesnesi: Google Form'a gönderilecek veri
+  const fd = new FormData();
+  fd.append("entry.104994271", type); // Google Form "Tür" alanı entry ID'si + seçilen değer
+
+  // Veriyi POST ile gönder
+  fetch(formURL, { method: "POST", mode: "no-cors", body: fd });
+
+  // Kullanıcıya geri bildirim
+  alert("Seçimin alındı: " + type);
+}
+</script>
+
+</body>
+</html>
