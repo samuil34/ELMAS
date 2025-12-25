@@ -15,86 +15,66 @@ body {
   align-items: center;
 }
 
-.logo-wrap {
+.logo {
   margin-top: 20px;
   text-align: center;
 }
-.logo-box {
+.logo div {
   position: relative;
   width: 156px;
   height: 180px;
   margin: auto;
 }
-.logo-box div {
+.logo div span {
   position: absolute;
   background: #d4af37;
 }
-.logo-top { top:94px; left:50%; width:60px; height:36px; transform:translateX(-50%); clip-path:polygon(0 0,100% 0,50% 100%);}
-.logo-mid { top:147px; left:50%; width:48px; height:48px; transform:translateX(-50%) rotate(45deg);}
-.logo-left { top:108px; left:18px; width:48px; height:48px; transform:rotate(45deg);}
-.logo-right { top:108px; right:18px; width:48px; height:48px; transform:rotate(45deg);}
+.top { top:94px; left:50%; width:60px; height:36px; transform:translateX(-50%); clip-path:polygon(0 0,100% 0,50% 100%); }
+.mid { top:147px; left:50%; width:48px; height:48px; transform:translateX(-50%) rotate(45deg); }
+.l { top:108px; left:18px; width:48px; height:48px; transform:rotate(45deg); }
+.r { top:108px; right:18px; width:48px; height:48px; transform:rotate(45deg); }
 
-.logo-text {
-  margin-top: 20px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #d4af37;
-}
-
-.screen {
-  display: none;
-  width: 90%;
-  max-width: 500px;
-  margin-top: 30px;
-  text-align: center;
-}
-
+.screen { display:none; width:90%; max-width:500px; margin-top:30px; text-align:center; }
 .screen.active { display:block; }
 
-.options {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
+.options { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
 .card {
-  background: white;
-  padding: 22px;
-  border-radius: 20px;
-  font-size: 22px;
-  cursor: pointer;
-  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+  background:#fff;
+  padding:20px;
+  border-radius:20px;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 4px 8px rgba(0,0,0,0.1);
 }
 
 input {
-  width: 90%;
-  padding: 15px;
-  font-size: 18px;
-  border-radius: 14px;
-  border: 1px solid #ccc;
+  width:90%;
+  padding:14px;
+  font-size:18px;
+  border-radius:14px;
+  border:1px solid #ccc;
 }
 
 button {
-  padding: 15px 30px;
-  font-size: 18px;
-  border-radius: 20px;
-  border: none;
-  background: #4CAF50;
-  color: white;
+  padding:15px 30px;
+  font-size:18px;
+  border:none;
+  border-radius:20px;
+  background:#4CAF50;
+  color:white;
 }
 </style>
 </head>
 
 <body>
 
-<div class="logo-wrap">
-  <div class="logo-box">
-    <div class="logo-top"></div>
-    <div class="logo-mid"></div>
-    <div class="logo-left"></div>
-    <div class="logo-right"></div>
+<div class="logo">
+  <div>
+    <span class="top"></span>
+    <span class="mid"></span>
+    <span class="l"></span>
+    <span class="r"></span>
   </div>
-  <div class="logo-text">ELMAS</div>
 </div>
 
 <div class="screen active">
@@ -107,7 +87,7 @@ button {
 
 <div class="screen">
   <h2>Bütçe</h2>
-  <input id="money" type="number" placeholder="Örn: 500000">
+  <input id="money" type="number">
   <button onclick="next()">Devam</button>
 </div>
 
@@ -121,7 +101,7 @@ button {
 </div>
 
 <div class="screen">
-  <h2>Oda Sayısı</h2>
+  <h2>Oda</h2>
   <div class="options">
     <div class="card" onclick="setRoom('1+1')">1+1</div>
     <div class="card" onclick="setRoom('2+1')">2+1</div>
@@ -133,8 +113,20 @@ button {
   <h2>İletişim</h2>
   <input id="name" placeholder="Ad Soyad">
   <input id="phone" placeholder="Telefon">
-  <button onclick="sendForm()">Gönder</button>
+  <button onclick="send()">Gönder</button>
 </div>
+
+<!-- GİZLİ FORM -->
+<form id="form" action="https://docs.google.com/forms/d/e/1FAIpQLSehNuzCi7WGMeQw_JXAK3sEPfnBEzgEIovx-C3EOYqUG1wQmw/formResponse" method="POST" target="hidden_iframe">
+  <input type="hidden" name="entry.104994271" id="f_type">
+  <input type="hidden" name="entry.1954403053" id="f_money">
+  <input type="hidden" name="entry.2112205297" id="f_city">
+  <input type="hidden" name="entry.268235315" id="f_room">
+  <input type="hidden" name="entry.985507002" id="f_name">
+  <input type="hidden" name="entry.1004051599" id="f_phone">
+</form>
+
+<iframe name="hidden_iframe" style="display:none;"></iframe>
 
 <script>
 let step = 0;
@@ -151,20 +143,19 @@ function setType(v){ data.type=v; next(); }
 function setCity(v){ data.city=v; next(); }
 function setRoom(v){ data.room=v; next(); }
 
-function sendForm(){
+function send(){
   data.name = document.getElementById("name").value;
   data.phone = document.getElementById("phone").value;
 
-  const url =
-    "https://docs.google.com/forms/d/e/1FAIpQLSehNuzCi7WGMeQw_JXAK3sEPfnBEzgEIovx-C3EOYqUG1wQmw/formResponse" +
-    "?entry.104994271=" + encodeURIComponent(data.type) +
-    "&entry.1954403053=" + encodeURIComponent(document.getElementById('money').value) +
-    "&entry.2112205297=" + encodeURIComponent(data.city) +
-    "&entry.268235315=" + encodeURIComponent(data.room) +
-    "&entry.985507002=" + encodeURIComponent(data.name) +
-    "&entry.1004051599=" + encodeURIComponent(data.phone);
+  document.getElementById("f_type").value = data.type;
+  document.getElementById("f_money").value = document.getElementById("money").value;
+  document.getElementById("f_city").value = data.city;
+  document.getElementById("f_room").value = data.room;
+  document.getElementById("f_name").value = data.name;
+  document.getElementById("f_phone").value = data.phone;
 
-  window.location.href = url;
+  document.getElementById("form").submit();
+  alert("Talebiniz başarıyla gönderildi!");
 }
 </script>
 
