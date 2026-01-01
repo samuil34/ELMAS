@@ -196,7 +196,8 @@ button {
   </label>
 </div>
  
-  <button onclick="finish()">Gönder</button>
+<button onclick="finish()" style="margin-top:25px;">Gönder</button>
+
 </div>
 
 <!-- ŞIK TİK MESAJI baş -->
@@ -354,8 +355,72 @@ function closeKvkk() {
     <h3>Kişisel Verilerin Korunması Aydınlatma Metni</h3>
 
     <p>
-      Bu platform; kullanıcı etkileşimlerini yönetmek amacıyla...
-      <!-- BURAYA TAM KVKK METNİNİ YAPIŞTIR -->
+     <h2>KİŞİSEL VERİLERİN KORUNMASI, AYDINLATMA VE AÇIK RIZA METNİ</h2>
+
+<h3>1. Platformun Yapısı ve İşleyişi</h3>
+<p>
+Bu platform; kullanıcı etkileşimlerini yönetmek üzere kapalı devre, erişimi sınırlandırılmış ve katmanlı bir yazılım mimarisi üzerinde çalışacak şekilde tasarlanmıştır.
+Sistem, davetli kullanıcılar üzerinden kademeli olarak devreye alınan ve operasyonel olgunluk doğrultusunda geliştirilen <strong>restricted-access</strong> bir yapıya sahiptir.
+</p>
+
+<h3>2. İşlenen Kişisel Veriler</h3>
+<p>
+Platform aracılığıyla paylaşılan ad, soyad, telefon numarası ve diğer iletişim bilgileri;
+kullanıcı taleplerinin alınması, değerlendirilmesi, eşleştirilmesi ve sonuçlandırılması amacıyla
+6698 sayılı <strong>Kişisel Verilerin Korunması Kanunu (KVKK)</strong> kapsamında işlenmektedir.
+</p>
+
+<h3>3. Veri İşleme Yöntemleri ve Güvenlik Önlemleri</h3>
+<p>Kişisel veriler;</p>
+<ul>
+  <li>İzole edilmiş çalışma ortamlarında (segmented runtime environments),</li>
+  <li>Rol ve yetki bazlı erişim kontrolü (RBAC) uygulanarak,</li>
+  <li>Olay güdümlü veri akışları (event-driven pipelines) üzerinden,</li>
+  <li>Veri minimizasyonu, bütünlük, izlenebilirlik ve operasyonel denetlenebilirlik ilkeleri doğrultusunda</li>
+</ul>
+<p>işlenmektedir.</p>
+
+<h3>4. Sistem Mimarisi ve Denetim</h3>
+<p>
+Platform kapsamında veri erişimleri ve işleme faaliyetleri; internal servisler, özel API katmanları ve kontrollü işlem akışları aracılığıyla yürütülmektedir.
+Sistem bütünlüğünün sağlanması amacıyla işlem kayıtları (loglar), erişim izleri (audit trail) ve gözlemlenebilirlik (observability) mekanizmaları kullanılmaktadır.
+</p>
+
+<h3>5. Veri Paylaşımı</h3>
+<p>
+Toplanan kişisel veriler; açık rıza olmaksızın üçüncü kişilerle paylaşılmaz, devredilmez, satılmaz ve kamuya açık uç noktalara (public endpoints) aktarılmaz.
+</p>
+
+<h3>6. Veri Sorumlusu</h3>
+<p>
+Bu platform kapsamında işlenen kişisel veriler, gerçek kişi veri sorumlusu tarafından yönetilmektedir.
+</p>
+
+<h3>7. Veri Sahibi Başvuru Hakkı</h3>
+<p>
+Veri sahipleri, 6698 sayılı KVKK’nın 11. maddesi kapsamında sahip oldukları haklara ilişkin taleplerini
+<a href="mailto:elmas.yapayzeka@gmail.com">elmas.yapayzeka@gmail.com</a> adresi üzerinden iletebilir.
+</p>
+
+<h3>8. Ticari Model ve Hizmet Kapsamı</h3>
+<p>
+Platformun hizmet kapsamı, fonksiyonel modülleri ve ticari yapısı; kullanım yoğunluğu, operasyonel gereklilikler ve sistem olgunluğu doğrultusunda aşamalı olarak şekillendirilebilir.
+</p>
+<p>
+Platform üzerinden sunulan eşleştirme, yönlendirme ve aracılık hizmetleri; ilerleyen dönemlerde ücretli, komisyon bazlı veya sözleşmeye dayalı ticari modellere dönüştürülebilir.
+</p>
+
+<h3>9. Açık Rıza Beyanı</h3>
+<p>
+☐ Kişisel verilerimin, yukarıda belirtilen sistemsel yapı, güvenlik mimarisi ve amaçlar doğrultusunda işlenmesine açık rıza verdiğimi kabul ediyorum.
+</p>
+
+<h3>10. Ek Güvence Bildirimi</h3>
+<p>
+Bu platformda veri işleme süreçleri; dış erişime kapalı internal servisler, kontrollü yaşam döngüsü yönetimi (lifecycle management) ve sınırlı erişim politikaları çerçevesinde yürütülmektedir.
+</p>
+
+      
     </p>
 
     <button onclick="closeKvkk()" style="
